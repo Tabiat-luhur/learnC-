@@ -24,6 +24,7 @@ public class Program
         Console.WriteLine("\t[2] Pinjam buku [Belum tersedia]");
         Console.WriteLine("\t[3] Kembalikan buku [Belum tersedia]");
         Console.WriteLine("\t[4] History [Belum tersedia]");
+        Console.WriteLine("\t[5] Logout [Belum tersedia]");
         Console.WriteLine("\n> Pilihan anda:");
         int select = int.Parse(Console.ReadLine());
         if(select>0 && select<5){
@@ -37,6 +38,9 @@ public class Program
                 case 3:
                 break;
                 case 4:
+                break;
+                case 5:
+                    goto usernameInput;
                 break;
                 default:
                 break;
