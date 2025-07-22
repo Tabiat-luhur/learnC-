@@ -5,19 +5,23 @@ public class Program{
         public string Shape {get; set;}
         public double Length {get; set;}
         public double Wide {get; set;}
-        public Room(string shape, double length,double wide){
+        public double Height {get; set;}
+        public Room(string shape, double length,double wide, double height){
             Shape=shape;
             Length=length;
             Wide=wide;
-            Console.WriteLine("Size Room: " + Size() +" m2.");
+            Height = height;
+            Console.WriteLine("> Size Room: " + Size() +" m2.");
         }
         public double Size(){
             switch (Shape.ToLower())
             {
                 case "persegi":
-                    return Length * Wide;
+                    return Length * Length;
                 case "persegi panjang":
                     return Length * Wide;
+                case "segitiga":
+                    return 0.5 * Length * Height;
                 default:
                     return 0;
             }
@@ -29,7 +33,7 @@ public class Program{
         Console.WriteLine("[ >> Kalkulator Luas Bangunan << ]");
         Console.Write("> Berapa ruangan: ");
         int nRoom = int.Parse(Console.ReadLine());
-        Console.WriteLine("\n[ Tersedia: Persegi, Persegi Panjang ]");
+        Console.WriteLine("\n[ Tersedia ] \n- Persegi\n- Persegi Panjang\n- Segitiga");
         double[] sumSize = new double[nRoom];
         for (int i = 0; i < nRoom; i++)
         {
@@ -38,9 +42,19 @@ public class Program{
             string shape = Console.ReadLine();
             Console.Write("- Length (m): ");
             double length = double.Parse(Console.ReadLine());
-            Console.Write("- Wide (m): ");
-            double wide = double.Parse(Console.ReadLine());
-            Room subSize = new Room(shape: shape, length: length, wide: wide);
+            double wide = 0;
+            double height = 0;
+            if (shape.ToLower() == "persegi panjang")
+            {
+                Console.Write("- Wide (m): ");
+                wide = double.Parse(Console.ReadLine());
+            }
+            else if (shape.ToLower() == "segitiga")
+            {
+                Console.Write("- Height (m): ");
+                height = double.Parse(Console.ReadLine());
+            }
+            Room subSize = new Room(shape: shape, length: length, wide: wide, height=height);
             sumSize[i] = subSize.Size();
         }
         double totalSumSize=0;
