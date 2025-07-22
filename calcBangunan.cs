@@ -11,7 +11,7 @@ public class Program{
             Length=length;
             Wide=wide;
             Height = height;
-            Console.WriteLine("> Size Room: " + Size() +" m2.");
+            Console.WriteLine("> Room Size: " + Size() +" m2.");
         }
         public double Size(){
             switch (Shape.ToLower())
