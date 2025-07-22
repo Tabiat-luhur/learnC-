@@ -22,6 +22,8 @@ public class Program{
                     return Length * Wide;
                 case "segitiga":
                     return 0.5 * Length * Height;
+                case "jajar genjang":
+                    return Length * Height;
                 default:
                     return 0;
             }
@@ -33,7 +35,7 @@ public class Program{
         Console.WriteLine("[ >> Kalkulator Luas Bangunan << ]");
         Console.Write("> Berapa ruangan: ");
         int nRoom = int.Parse(Console.ReadLine());
-        Console.WriteLine("\n[ Tersedia ] \n- Persegi\n- Persegi Panjang\n- Segitiga");
+        Console.WriteLine("\n[ Tersedia ] \n- Persegi\n- Persegi Panjang\n- Segitiga\n- Jajar Genjang");
         double[] sumSize = new double[nRoom];
         for (int i = 0; i < nRoom; i++)
         {
@@ -49,7 +51,7 @@ public class Program{
                 Console.Write("- Wide (m): ");
                 wide = double.Parse(Console.ReadLine());
             }
-            else if (shape.ToLower() == "segitiga")
+            else if (shape.ToLower() == "segitiga" || shape.ToLower() == "jajar genjang")
             {
                 Console.Write("- Height (m): ");
                 height = double.Parse(Console.ReadLine());
