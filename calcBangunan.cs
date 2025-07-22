@@ -9,7 +9,7 @@ public class Program{
             Shape=shape;
             Length=length;
             Wide=wide;
-            Console.WriteLine("Size Room: " + Size() +"m2.");
+            Console.WriteLine("Size Room: " + Size() +" m2.");
         }
         public double Size(){
             switch (Shape.ToLower())
@@ -27,18 +27,18 @@ public class Program{
     static void Main(string[] args)
     {
         Console.WriteLine("[ >> Kalkulator Luas Bangunan << ]");
-        Console.WriteLine("> Berapa ruangan:");
+        Console.Write("> Berapa ruangan: ");
         int nRoom = int.Parse(Console.ReadLine());
-        Console.WriteLine("[ Tersedia: Persegi, Persegi Panjang ]");
+        Console.WriteLine("\n[ Tersedia: Persegi, Persegi Panjang ]");
         double[] sumSize = new double[nRoom];
         for (int i = 0; i < nRoom; i++)
         {
-            Console.WriteLine("Room ke-" + (i + 1));
-            Console.WriteLine("- Shape:");
+            Console.WriteLine("\n# Room ke-" + (i + 1));
+            Console.Write("- Shape: ");
             string shape = Console.ReadLine();
-            Console.WriteLine("- Length:");
+            Console.Write("- Length (m): ");
             double length = double.Parse(Console.ReadLine());
-            Console.WriteLine("- Wide:");
+            Console.Write("- Wide (m): ");
             double wide = double.Parse(Console.ReadLine());
             Room subSize = new Room(shape: shape, length: length, wide: wide);
             sumSize[i] = subSize.Size();
