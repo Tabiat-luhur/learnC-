@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Todo-List App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="todo.js"></script>
+    <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+    <h2>Todo-List App</h2>
+    <button onclick="loadTodo()">Ambil Data</button>
+    <input id="task" type="text" placeholder="Tambahkan tugas...">
+    <input id="desc" type="text" placeholder="Deskripsi tugas...">
+    <button onclick="addTodo()">Add</button>
+    <input id="search" type="text" placeholder="Cari tugas...">
+    <button onclick="searchTodo()">Search</button>
+
+
+    <table id="dataTable" style="display: none;">
+        <thead><tr id="tableHeader"></tr></thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <script>
+    </script>
+
+</body>
+</html>

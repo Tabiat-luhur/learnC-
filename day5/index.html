@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Todo-List App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <h2>Data DeptUser dari Service</h2>
+    <button onclick="loadData()">Ambil Data</button>
+    <button onclick="InsertData()">Insert</button>
+    <button onclick="InsertData()">Insert</button>
+
+    <table id="dataTable" style="display: none;">
+        <thead><tr id="tableHeader"></tr></thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <script>
+        function loadData() {
+            const jsonService = {
+                service: "TodoService.Class1.GetTodosDone",
+                params: []
+            };
+
+            const url = "http://172.19.62.225/RIAService/AjaxServiceNew.ashx?JsonService=" + encodeURIComponent(JSON.stringify(jsonService));
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json",
+                success: function (response) {
+                    debugger
+                    if (response && response.Result && response["Result"].length > 0) {
+                        debugger
+                        renderTable(response["Result"]);
+                    } else {
+                        alert("Data tidak ditemukan");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", error);
+                    alert("Gagal mengambil data");
+                }
+            });
+        }
+
+   function renderTable(data) {
+    debugger
+    $("#dataTable").show();
+
+    const headers = Object.keys(data[0]);
+
+    // Tambahkan kolom "Action" untuk tombol delete
+    const headerHtml = headers.map(key => `<th>${key}</th>`).join("") + `<th>Action</th>`;
+    $("#tableHeader").html(headerHtml);
+
+    const rowsHtml = data.map((row) => {
+        const rowHtml = headers.map(h => `<td>${row[h] !== null ? row[h] : ''}</td>`).join("");
+        
+        // Pastikan row.todo_id ada
+        const todoId = row["todo_id"] ?? "";
+        const deleteButton = `<td><button onclick="deleteTodo('${todoId}')">Delete</button></td>`;
+
+        return `<tr>${rowHtml}${deleteButton}</tr>`;
+    }).join("");
+
+    $("#tableBody").html(rowsHtml);
+}
+        function InsertData(){
+             const jsonService = {
+                service: "Training1.Class1.InsertData",
+                params: ["test from UI","ini desc"]
+            };
+            const url = "http://172.19.62.225/RIAService/AjaxServiceNew.ashx?JsonService=" + encodeURIComponent(JSON.stringify(jsonService));
+           $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "json",
+                success: function (response) {
+                    if (response && response.Result && response["Result"].length > 0) {
+                        debugger
+                        renderTable(response["Result"]);
+                    } else {
+                        alert("Data tidak ditemukan");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", error);
+                    alert("Gagal mengambil data");
+                }
+            });
+
+
+        }
+        function deleteTodo(todoId) {
+            debugger
+    if (confirm("Are you sure you want to delete this todo?")) {
+        // Kirim ke backend atau proses hapus lokal
+        console.log("Deleting todo with ID:", todoId);
+
+        // Contoh: AJAX ke server (jika kamu punya endpoint delete)
+        /*
+        $.post("delete_todo_endpoint", { id: todoId }, function(response) {
+            // Refresh tabel atau ambil ulang data
+            fetchTodos();
+        });
+        */
+
+        // Atau, jika data lokal, hapus manual:
+        data = data.filter(item => item.todo_id !== todoId);
+        renderTable(data);
+    }
+}
+    </script>
+
+</body>
+</html>
